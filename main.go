@@ -11,7 +11,7 @@ import (
 
 type status int
 
-const divisor = 4
+const divisor = 5
 
 
 const (
@@ -54,9 +54,9 @@ func New() *Model {
 
 // TODO: call this on tea.windowsizemsg
 func (m *Model) initLists(width, height int) {
-	defaultList := list.New([]list.Item{}, list.NewDefaultDelegate(), width/divisor, height)
-	m.lists = []list.Model{defaultList, defaultList, defaultList}
-
+	defaultList := list.New([]list.Item{}, list.NewDefaultDelegate(), width/divisor-2, height)
+  defaultList.SetShowHelp(false)
+  m.lists = []list.Model{defaultList, defaultList, defaultList}
 	// Init To Do
 	m.lists[todo].Title = "To Do"
 	m.lists[todo].SetItems([]list.Item{
@@ -107,7 +107,6 @@ func (m Model) View() string {
   }else {
    return "loading..."
   }
-
 }
 
 func main() {
